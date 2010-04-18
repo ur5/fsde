@@ -1,0 +1,41 @@
+<script type="text/javascript">
+  var json = {
+    'id': 'node02',
+    'name': 'Deutschland',
+    'data': {
+      '$area': <%= @states.sum(&:total).to_i %>,
+      '$color': 5
+    },
+    'children': [
+      <% @states.each do |state| %>
+        {
+          'id': "<%= dom_id(state) %>",
+          'name': "<%= state.name %>",
+          'data': {
+            '$area': <%= state.total.to_i %>,
+            '$color': 8
+          },
+          "children": []
+        },
+      <% end %>
+    ]
+  };
+  
+  $(function(){
+    var treemap = new TM.Squarified({
+      rootId: 'infovis',
+      levelsToShow: 1
+    });
+    treemap.loadJSON(json);
+  });
+</script>
+
+<div id="infovis">
+  
+</div>
+
+<ul>
+  <% @states.each do |state| %>
+    <li><%= state.name %> (<%= number_to_currency(state.total, :format => '€ %n') %>)</li>
+  <% end %>
+</ul>

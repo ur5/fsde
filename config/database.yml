@@ -1,0 +1,13 @@
+development:
+  adapter: mysql
+  database: fsde_development
+  username: root
+  socket: /tmp/mysql.sock
+  encoding: utf8
+
+test:
+  adapter: mysql
+  database: fsde_test
+  username: root
+  socket: /tmp/mysql.sock
+  encoding: utf8
